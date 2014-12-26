@@ -378,7 +378,7 @@ class Bridge
     Bridge(uint32_t version_major) : m_state(version_major, NULL) { }
 
     /// Virtual destructor.
-    virtual ~Bridge() { }
+    virtual ~Bridge() = default;
 
     /// Push state information onto stack.
     void push_state(void);
