@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="us-ascii" standalone="yes"?>
+<example version="2.3" mandatory="3.1415" optional="hello world">
+  <foobar optional="this &lt;element&gt; sees version=2">
+    <version2 value="2" />
+  </foobar>
+  <foobar version="5"> <!-- This node does not have the 'optional' attribute. -->
+    <version5 />
+  </foobar>
+  <foobar optional="this one does">
+    <param>1.0</param>
+    <version5 empty="1.0" value="5" />
+    <param>4.3</param>
+    <param>5.6</param>
+    <str>Hello World</str>
+    <str>  &lt;-- two spaces</str>
+    <str>One
+      word
+      per
+      line</str>
+  </foobar>
+</example>
