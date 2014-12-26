@@ -28,6 +28,7 @@
 
 #ifndef USE_PCH
 #include "debug.h"
+#include "utils/debug_ostream_operators.h"
 #include <iostream>
 #include <boost/filesystem.hpp>
 #include <set>
