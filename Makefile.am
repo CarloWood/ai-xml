@@ -29,13 +29,13 @@ example_test_SOURCES = \
 
 catalog_test_CXXFLAGS = @LIBXML_CFLAGS@ @CXXFLAGS@ @CWD_FLAGS@
 catalog_test_LDFLAGS =
-catalog_test_LDADD = .libs/libxml.a  ../utils/.libs/libutils.a ../cwd/.libs/libdebug.a @LIBXML_LIBS@ @LIBS@ @CWD_LIBS@
-catalog_test_DEPENDENCIES = libxml.la ../utils/libutils.la ../cwd/libdebug.la
+catalog_test_LDADD = .libs/libxml.a ../cwd/.libs/libdebug.a ../utils/.libs/libutils.a @LIBXML_LIBS@ @LIBS@ @CWD_LIBS@
+catalog_test_DEPENDENCIES = libxml.la ../cwd/libdebug.la ../utils/libutils.la
 
 example_test_CXXFLAGS = @LIBXML_CFLAGS@ @CXXFLAGS@ @CWD_FLAGS@
 example_test_LDFLAGS =
-example_test_LDADD = .libs/libxml.a  ../utils/.libs/libutils.a ../cwd/.libs/libdebug.a @LIBXML_LIBS@ @LIBS@ @CWD_LIBS@
-example_test_DEPENDENCIES = libxml.la ../cwd/libdebug.la
+example_test_LDADD = .libs/libxml.a ../cwd/.libs/libdebug.a ../utils/.libs/libutils.a @LIBXML_LIBS@ @LIBS@ @CWD_LIBS@
+example_test_DEPENDENCIES = libxml.la ../cwd/libdebug.la ../utils/libutils.la
 
 MAINTAINERCLEANFILES = $(srcdir)/Makefile.in
 

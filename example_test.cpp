@@ -180,8 +180,8 @@ int main(int argc, char* argv[])
   }
   catch(AIAlert::Error const& error)
   {
-    //std::cerr << AIAlert::Error(AIAlert::Prefix(), AIAlert::not_modal, "Failed to load [FILE]: ",
-//	AIArgs("[FILE]", filepath.native()), error) << std::endl;
+    std::cerr << AIAlert::Error(AIAlert::Prefix(), AIAlert::not_modal, "Failed to load [FILE]: ",
+	AIArgs("[FILE]", filepath.native()), error) << std::endl;
     return 1;
   }
   catch(std::runtime_error const& error)
