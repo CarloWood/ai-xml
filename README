@@ -23,6 +23,8 @@ CW_OPG_FLAGS([-W -Wall -Woverloaded-virtual -Wundef -Wpointer-arith -Wwrite-stri
 
 dnl This source code is C++11 and thread-safe.
 CXXFLAGS="$CXXFLAGS -pthread -std=c++11"
+
+dnl Add support for libcwd.
 LIBCWD_FLAGS="$CWD_R_FLAGS"
 LIBCWD_LIBS="$CWD_R_LIBS"
 AC_SUBST(LIBCWD_FLAGS)
@@ -31,6 +33,9 @@ AC_SUBST(LIBCWD_LIBS)
 dnl Each Makefile.am should use DEFS = @DEFS@. Set DEFS here.
 DEFS="-DHAVE_CONFIG_H"
 AC_SUBST(DEFS)
+
+dnl Libraries.
+PKG_CHECK_MODULES([LIBXML], [libxml++-2.6])
 -----------------------------------------------------------------------------
 
 This is then all the requirements needed for the dependency
@@ -38,7 +43,7 @@ on cwautomacros (which has to be installed seperately) and libcwd,
 except the latter also means you have to supply a 'debug.h'
 and 'sys.h' (see the libcwd documentation).
 
-Also add 'xml' to the SUBDIRS of Makefile.am of the
+Also add 'xml' to the SUBDIRS of the Makefile.am of the
 parent directory (ie src/Makefile.am). For example,
 
 SUBDIRS = utils xml .
@@ -52,7 +57,7 @@ DEFAULT_INCLUDES=-iquote $(top_builddir) -iquote $(top_builddir)/src -iquote $(s
 Note the last '-iquote $(srcdir)' which will allow
 #include "xml/Reader.h"
 in source files in src, while a src/foo/Makefile.am
-that wanted to use src/utils would do:
+that wanted to use src/xml would do:
 
 DEFAULT_INCLUDES=-iquote $(top_builddir) -iquote $(top_builddir)/src -iquote $(srcdir)/..
 
@@ -62,8 +67,9 @@ bin_PROGRAMS = foobar
 
 would also define
 
-foobar_LDADD = ../utils/.libs/libutils.a ../xml/.libs/libxml.a
-foobar_DEPENDENCIES = ../utils/libutils.la ../xml/libxml.la
+foobar_CXXFLAGS = @LIBXML_CFLAGS@ @CXXFLAGS@ @LIBCWD_FLAGS@
+foobar_LDADD = ../xml/.libs/libxml.a ../utils/.libs/libutils.a @LIBXML_LIBS@ @LIBS@ @LIBCWD_LIBS@
+foobar_DEPENDENCIES = ../xml/libxml.la ../utils/libutils.la
 
 or whatever the path to xml (and utils) is.
 
