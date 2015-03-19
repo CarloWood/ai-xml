@@ -47,13 +47,13 @@ void Bridge::set_version(uint32_t version_major)
   m_state.m_version_major = version_major;
 }
 
-void Bridge::push_state(void)
+void Bridge::push_state()
 {
   m_state_stack.push(m_state);
   ++m_state.m_depth;
 }
 
-void Bridge::pop_state(void)
+void Bridge::pop_state()
 {
 #ifdef CWDEBUG
   uint32_t version = m_state.m_version_major;
@@ -76,12 +76,12 @@ void Bridge::pop_state(void)
 
 // Virtual functions only implemented in ReadBridge:
 
-void Bridge::get_element(void)
+void Bridge::get_element()
 {
   DoutFatal(dc::core, "Calling WriteBridge::get_element()!?");
 }
 
-void Bridge::next_child(void)
+void Bridge::next_child()
 {
   DoutFatal(dc::core, "Calling WriteBridge::next_child()!?");
 }
@@ -91,7 +91,7 @@ bool Bridge::read_attribute(char const* UNUSED_ARG(name), std::string& UNUSED_AR
   DoutFatal(dc::core, "Calling WriteBridge::read_attribute()!?");
 }
 
-std::string Bridge::read_child_stream(void)
+std::string Bridge::read_child_stream()
 {
   DoutFatal(dc::core, "Calling WriteBridge::read_child_stream()!?");
 }
@@ -103,7 +103,7 @@ void Bridge::write_attribute(char const* UNUSED_ARG(name), std::string const& UN
   DoutFatal(dc::core, "Calling ReadBridge::write_attribute()!?");
 }
 
-std::ostream& Bridge::get_os(void)
+std::ostream& Bridge::get_os()
 {
   DoutFatal(dc::core, "Calling ReadBridge::get_os()!?");
 }

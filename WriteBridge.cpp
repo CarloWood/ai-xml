@@ -82,7 +82,7 @@ void WriteBridge::child(char const* name, char const* value)
   close_child();
 }
 
-void WriteBridge::open_child(void)
+void WriteBridge::open_child()
 {
   DoutEntering(dc::xmlparser, "WriteBridge::open_child()");
 
@@ -101,7 +101,7 @@ void WriteBridge::open_child(char const* name)
   m_state.m_element_name = name;
 }
 
-std::ostream& WriteBridge::get_os(void)
+std::ostream& WriteBridge::get_os()
 {
   return m_os;
 }
@@ -176,7 +176,7 @@ void WriteBridge::state_type::close_child(std::ostream& os)
   m_element_tag_state = closed;
 }
 
-void WriteBridge::close_child(void)
+void WriteBridge::close_child()
 {
   DoutEntering(dc::xmlparser, "WriteBridge::close_child()");
   m_state.close_child(m_os);

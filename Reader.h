@@ -42,7 +42,7 @@ class Reader : public ReadBridge
 
   public:
     /// Construct an empty XML parser.
-    Reader(void);
+    Reader();
 
     /// Parse an XML file.
     void parse(std::istream& file, uint32_t version_major);

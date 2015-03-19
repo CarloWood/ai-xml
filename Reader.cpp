@@ -33,7 +33,7 @@ namespace fs = boost::filesystem;
 
 namespace xml {
 
-Reader::Reader(void)
+Reader::Reader()
 {
   m_parser.set_substitute_entities();
 }

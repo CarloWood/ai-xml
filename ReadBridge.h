@@ -69,13 +69,13 @@ class ReadBridge : public Bridge
       xmlpp::Element const* m_element;				///< The current (child) element being processed.
 
       /// Construct an initial state_type suitable for the root element.
-      state_type(void) : m_current_parent(NULL), m_current_child(m_child_list.end()), m_element(NULL) { }
+      state_type() : m_current_parent(NULL), m_current_child(m_child_list.end()), m_element(NULL) { }
       /// Construct a state_type for element \a element with no children loaded yet.
       state_type(xmlpp::Element const* element) : m_current_parent(NULL), m_current_child(m_child_list.end()), m_element(element) { }
 
       void swap(state_type& state);				///< Swap the contents with \a state, preventing a copy of m_child_list and therefore keeping iterators to it valid.
       void refresh_children(Glib::ustring const& name);		///< Load children with name \a name.
-      void get_element(void);					///< If m_current_child does not point to an xmlpp::Element, advance it till it does (or reaches the end of the list).
+      void get_element();					///< If m_current_child does not point to an xmlpp::Element, advance it till it does (or reaches the end of the list).
       /**
         * \brief Initialize the state data.
 	*
@@ -98,26 +98,26 @@ class ReadBridge : public Bridge
 
   public:
     /// Return the internal state of the ReadBridge.
-    state_type const& state(void) const { return m_state; }
+    state_type const& state() const { return m_state; }
 
   protected:
     /// Construct an uninitialized ReadBridge.
-    ReadBridge(void) : Bridge(0), m_root_element(NULL) { }
+    ReadBridge() : Bridge(0), m_root_element(NULL) { }
 
-    /*virtual*/ bool writing(void) const { return false; }
+    /*virtual*/ bool writing() const { return false; }
     /*virtual*/ void node_name(char const* name) { m_state.node_name(name, m_root_element); }
     /*virtual*/ void attribute(char const* name, char const* value);
     /*virtual*/ void child(const char*, const char*);
 
 /// @cond Doxygen_Suppress
   protected:
-    /*virtual*/ void open_child(void);
+    /*virtual*/ void open_child();
     /*virtual*/ void open_child(char const* name);
-    /*virtual*/ void close_child(void);
-    /*virtual*/ void get_element(void);
-    /*virtual*/ void next_child(void);
+    /*virtual*/ void close_child();
+    /*virtual*/ void get_element();
+    /*virtual*/ void next_child();
     /*virtual*/ bool read_attribute(char const* name, std::string& attribute_str, bool mandatory) const;
-    /*virtual*/ std::string read_child_stream(void);
+    /*virtual*/ std::string read_child_stream();
 /// @endcond
 };
 

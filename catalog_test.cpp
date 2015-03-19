@@ -77,7 +77,7 @@ class Product
     image_map_type m_image_map;
     std::vector<CatalogItem> m_items;
   public:
-    image_map_type& map(void) { return m_image_map; }
+    image_map_type& map() { return m_image_map; }
     void xml(xml::Bridge& xml);
 };
 

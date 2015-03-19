@@ -381,9 +381,9 @@ class Bridge
     virtual ~Bridge() = default;
 
     /// Push state information onto stack.
-    void push_state(void);
+    void push_state();
     /// Pop state information from stack.
-    void pop_state(void);
+    void pop_state();
 
   public:
     /** \brief Accessor for the current version.
@@ -392,7 +392,7 @@ class Bridge
       * siblings with the same name that are yet to be processed) by calling
       * set_version().
       */
-    uint32_t version(void) const { return m_state.m_version_major; }
+    uint32_t version() const { return m_state.m_version_major; }
 
     /** \brief Set the major version of this particular element.
       * \param version_major : the version to be used by this element and all its children.
@@ -404,7 +404,7 @@ class Bridge
     void set_version(uint32_t version_major);
 
     /// Return true if this bridge is writing to an XML file, false when it is reading.
-    virtual bool writing(void) const = 0;
+    virtual bool writing() const = 0;
 
     /** \brief Specify the name of an element.
       * \param name : the name of the element.
@@ -517,7 +517,7 @@ class Bridge
     /// Set a user pointer.
     void set_user_ptr(void* user_ptr) { m_state.m_user_ptr = user_ptr; }
     /// Get the user pointer that was set with set_user_ptr().
-    void* get_user_ptr(void) const { return m_state.m_user_ptr; }
+    void* get_user_ptr() const { return m_state.m_user_ptr; }
 
 /// @cond Doxygen_Suppress
   protected:
@@ -531,17 +531,17 @@ class Bridge
     // The series open_child_name(name, T&)/[next_child()/.../next_child()/]close_child() are called around
     // calls to write_child_stream(string)/read_child_stream() when invoking Bridge::children_stream(name, T&),
     // although when writing the calls to next_child() are omitted.
-    virtual void open_child(void) = 0;
+    virtual void open_child() = 0;
     virtual void open_child(char const* name) = 0;
-    virtual void close_child(void) = 0;
+    virtual void close_child() = 0;
 
     // Virtual functions implemented in ReadBridge:
-    virtual void get_element(void);
-    virtual void next_child(void);
+    virtual void get_element();
+    virtual void next_child();
     virtual bool read_attribute(char const* name, std::string& attribute_str, bool mandatory) const;
-    virtual std::string read_child_stream(void);
+    virtual std::string read_child_stream();
     // Virtual functions only implemented in WriteBridge:
-    virtual std::ostream& get_os(void);
+    virtual std::ostream& get_os();
     virtual void write_attribute(char const* name, std::string const& raw_attribute);
     virtual void write_child_stream(std::string const& element);
 /// @endcond

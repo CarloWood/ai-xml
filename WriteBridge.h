@@ -69,17 +69,17 @@ class WriteBridge : public Bridge
       */
     WriteBridge(std::ostream& os, uint32_t version_major);
 
-    /*virtual*/ bool writing(void) const { return true; }
+    /*virtual*/ bool writing() const { return true; }
     /*virtual*/ void node_name(char const* name);
     /*virtual*/ void attribute(char const* name, char const* value);
     /*virtual*/ void child(const char*, const char*);
 
 /// @cond Doxygen_Suppress
   protected:
-    /*virtual*/ void open_child(void);
+    /*virtual*/ void open_child();
     /*virtual*/ void open_child(char const* name);
-    /*virtual*/ void close_child(void);
-    /*virtual*/ std::ostream& get_os(void);
+    /*virtual*/ void close_child();
+    /*virtual*/ std::ostream& get_os();
     /*virtual*/ void write_attribute(char const* name, std::string const& raw_attribute);
     /*virtual*/ void write_child_stream(std::string const& element);
 /// @endcond

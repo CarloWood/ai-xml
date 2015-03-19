@@ -41,7 +41,7 @@ void ReadBridge::state_type::refresh_children(Glib::ustring const& name)
   m_current_child = m_child_list.begin();
 }
 
-void ReadBridge::state_type::get_element(void)
+void ReadBridge::state_type::get_element()
 {
   while (m_current_child != m_child_list.end())
   {
@@ -57,7 +57,7 @@ void ReadBridge::state_type::get_element(void)
       AIArgs("[PARENT]", m_current_parent->get_name())("[LINE]", m_current_parent->get_line())("[NAME]", m_current_child_name));
 }
 
-void ReadBridge::get_element(void)
+void ReadBridge::get_element()
 {
   return m_state.get_element();
 }
@@ -134,7 +134,7 @@ void ReadBridge::state_type::swap(state_type& state)
   std::swap(m_element, state.m_element);
 }
 
-void ReadBridge::open_child(void)
+void ReadBridge::open_child()
 {
   DoutEntering(dc::xmlparser, "ReadBridge::open_child()");
 
@@ -156,7 +156,7 @@ void ReadBridge::open_child(char const* name)
   m_state.get_element();
 }
 
-void ReadBridge::next_child(void)
+void ReadBridge::next_child()
 {
   // Call get_element() (open_child(name) or next_child()) before calling next_child().
   ASSERT(m_state.m_current_child != m_state.m_child_list.end());
@@ -182,7 +182,7 @@ bool ReadBridge::read_attribute(char const* name, std::string& attribute_str, bo
   return true;
 }
 
-std::string ReadBridge::read_child_stream(void)
+std::string ReadBridge::read_child_stream()
 {
   xmlpp::Element const* node = dynamic_cast<xmlpp::Element const*>(*m_state.m_current_child);
   // Call get_element() (open_child(name) or next_child()) before calling read_child_stream.
@@ -196,7 +196,7 @@ std::string ReadBridge::read_child_stream(void)
   return textnode->get_content();
 }
 
-void ReadBridge::close_child(void)
+void ReadBridge::close_child()
 {
   Debug(libcw_do.pop_marker());
   Dout(dc::xmlparser, "ReadBridge::close_child() </" << m_state.m_current_child_name << ">");
