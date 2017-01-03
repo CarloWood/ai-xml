@@ -21,11 +21,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef USE_PCH
 #include "sys.h"
-#endif
-
 #include "SetLocale.h"
+#include "utils/macros.h"
 
 namespace xml {
 

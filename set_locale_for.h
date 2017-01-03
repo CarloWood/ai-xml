@@ -24,14 +24,12 @@
  * \brief Helper template class to specialize for SetLocale derived classes.
  */
 
-#include "SetLocale.h"
-
-#ifndef USE_PCH
-#include <type_traits>
-#endif
-
 #ifndef XML_SET_LOCALE_FOR_H
 #define XML_SET_LOCALE_FOR_H
+
+#include "SetLocale.h"
+#include "utils/macros.h"
+#include <type_traits>
 
 namespace xml {
 

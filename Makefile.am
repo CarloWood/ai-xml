@@ -1,25 +1,31 @@
-EXTRA_DIST = *.h
+AM_CPPFLAGS = -iquote $(top_srcdir) -iquote $(top_srcdir)/cwd
 
 noinst_LTLIBRARIES = libxml.la
 bin_PROGRAMS = catalog_test example_test
 
-# See src/Makefile.am
-DEFS = @DEFS@
-DEFAULT_INCLUDES=-iquote $(top_builddir) -iquote $(top_builddir)/src -iquote $(srcdir) -iquote $(srcdir)/.. -iquote $(srcdir)/../cwd
-
-# See src/Makefile.am.
-libxml_la_CXXFLAGS = @LIBXML_CFLAGS@ @CXXFLAGS@ @LIBCWD_FLAGS@
 libxml_la_SOURCES = \
 	Bridge.cpp \
+	Bridge.h \
 	escape.cpp \
+	escape.h \
 	Writer.cpp \
+	Writer.h \
 	ReadBridge.cpp \
+	ReadBridge.h \
 	WriteBridge.cpp \
+	WriteBridge.h \
 	Reader.cpp \
+	Reader.h \
 	read_from_string.cpp \
+	read_from_string.h \
 	read_from_stream.cpp \
+	read_from_stream.h \
 	write_to_stream.cpp \
-	SetLocale.cpp
+	write_to_stream.h \
+	SetLocale.cpp \
+	SetLocale.h \
+	set_locale_for.h \
+	write_to_string.h
 
 catalog_test_SOURCES = \
 	catalog_test.cpp
@@ -27,17 +33,15 @@ catalog_test_SOURCES = \
 example_test_SOURCES = \
 	example_test.cpp
 
-catalog_test_CXXFLAGS = @LIBXML_CFLAGS@ @CXXFLAGS@ @LIBCWD_FLAGS@
-catalog_test_LDFLAGS =
-catalog_test_LDADD = .libs/libxml.a ../utils/.libs/libutils.a ../cwd/.libs/libdebug.a @LIBXML_LIBS@ @LIBS@ @LIBCWD_LIBS@
-catalog_test_DEPENDENCIES = libxml.la ../utils/libutils.la ../cwd/libdebug.la
+libxml_la_CXXFLAGS = @LIBXML_CFLAGS@ @LIBCWD_FLAGS@
 
-example_test_CXXFLAGS = @LIBXML_CFLAGS@ @CXXFLAGS@ @LIBCWD_FLAGS@
-example_test_LDFLAGS =
-example_test_LDADD = .libs/libxml.a ../utils/.libs/libutils.a ../cwd/.libs/libdebug.a @LIBXML_LIBS@ @LIBS@ @LIBCWD_LIBS@
-example_test_DEPENDENCIES = libxml.la ../utils/libutils.la ../cwd/libdebug.la
+catalog_test_CXXFLAGS = @LIBXML_CFLAGS@ @LIBCWD_FLAGS@
+catalog_test_LDADD = libxml.la ../utils/libutils.la ../cwd/libdebug.la @BOOST_FILESYSTEM_LIB@ @BOOST_SYSTEM_LIB@ @LIBXML_LIBS@ @LIBCWD_LIBS@
 
-MAINTAINERCLEANFILES = $(srcdir)/Makefile.in
+example_test_CXXFLAGS = @LIBXML_CFLAGS@ @LIBCWD_FLAGS@
+example_test_LDADD = libxml.la ../utils/libutils.la ../cwd/libdebug.la @BOOST_FILESYSTEM_LIB@ @BOOST_SYSTEM_LIB@ @LIBXML_LIBS@ @LIBCWD_LIBS@
+
+# --------------- Maintainer's Section
 
 if MAINTAINER_MODE
 distclean-local:
@@ -45,3 +49,5 @@ distclean-local:
 
 clean-local:
 endif
+
+MAINTAINERCLEANFILES = $(srcdir)/Makefile.in
