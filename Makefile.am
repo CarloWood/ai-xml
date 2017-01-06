@@ -4,34 +4,34 @@ noinst_LTLIBRARIES = libxml.la
 bin_PROGRAMS = catalog_test example_test
 
 libxml_la_SOURCES = \
-	Bridge.cpp \
+	Bridge.cxx \
 	Bridge.h \
-	escape.cpp \
+	escape.cxx \
 	escape.h \
-	Writer.cpp \
+	Writer.cxx \
 	Writer.h \
-	ReadBridge.cpp \
+	ReadBridge.cxx \
 	ReadBridge.h \
-	WriteBridge.cpp \
+	WriteBridge.cxx \
 	WriteBridge.h \
-	Reader.cpp \
+	Reader.cxx \
 	Reader.h \
-	read_from_string.cpp \
+	read_from_string.cxx \
 	read_from_string.h \
-	read_from_stream.cpp \
+	read_from_stream.cxx \
 	read_from_stream.h \
-	write_to_stream.cpp \
+	write_to_stream.cxx \
 	write_to_stream.h \
-	SetLocale.cpp \
+	SetLocale.cxx \
 	SetLocale.h \
 	set_locale_for.h \
 	write_to_string.h
 
 catalog_test_SOURCES = \
-	catalog_test.cpp
+	catalog_test.cxx
 
 example_test_SOURCES = \
-	example_test.cpp
+	example_test.cxx
 
 libxml_la_CXXFLAGS = @LIBXML_CFLAGS@ @LIBCWD_FLAGS@
 
