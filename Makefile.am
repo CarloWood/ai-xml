@@ -36,10 +36,10 @@ example_test_SOURCES = \
 libxml_la_CXXFLAGS = @LIBXML_CFLAGS@ @LIBCWD_FLAGS@
 
 catalog_test_CXXFLAGS = @LIBXML_CFLAGS@ @LIBCWD_FLAGS@
-catalog_test_LDADD = libxml.la ../utils/libutils.la ../cwd/libdebug.la @BOOST_FILESYSTEM_LIB@ @BOOST_SYSTEM_LIB@ @LIBXML_LIBS@ @LIBCWD_LIBS@
+catalog_test_LDADD = libxml.la ../utils/libutils.la ../cwd/libcwd.la @BOOST_FILESYSTEM_LIB@ @BOOST_SYSTEM_LIB@ @LIBXML_LIBS@ @LIBCWD_LIBS@
 
 example_test_CXXFLAGS = @LIBXML_CFLAGS@ @LIBCWD_FLAGS@
-example_test_LDADD = libxml.la ../utils/libutils.la ../cwd/libdebug.la @BOOST_FILESYSTEM_LIB@ @BOOST_SYSTEM_LIB@ @LIBXML_LIBS@ @LIBCWD_LIBS@
+example_test_LDADD = libxml.la ../utils/libutils.la ../cwd/libcwd.la @BOOST_FILESYSTEM_LIB@ @BOOST_SYSTEM_LIB@ @LIBXML_LIBS@ @LIBCWD_LIBS@
 
 # --------------- Maintainer's Section
 
