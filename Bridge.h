@@ -1,6 +1,6 @@
 /**
- * \file Bridge.h
- * \brief Definition of class Bridge.
+ * @file
+ * @brief Definition of class Bridge.
  *
  * Copyright (C) 2014, 2016  Carlo Wood.
  *
@@ -300,8 +300,7 @@
  * This above code is provided as complete test application in `src/xml` under the name `catalog_test.cpp`.
  */
 
-#ifndef XML_BRIDGE_H
-#define XML_BRIDGE_H
+#pragma once
 
 #include "read_from_string.h"
 #include "write_to_string.h"
@@ -806,5 +805,3 @@ void Bridge::children_stream(char const* name, CONTAINER& container, METHOD meth
 }
 
 } // namespace xml
-
-#endif // XML_BRIDGE_H

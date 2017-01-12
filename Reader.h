@@ -1,8 +1,8 @@
 /**
- * \file Reader.h
- * \brief This file contains the declaration of class Reader.
+ * @file
+ * @brief This file contains the declaration of class Reader.
  *
- * Copyright (C) 2014, 2016  Carlo Wood.
+ * Copyright (C) 2014 - 2017  Carlo Wood.
  *
  * RSA-1024 0x624ACAD5 1997-01-26                    Sign & Encrypt
  * Fingerprint16 = 32 EC A7 B6 AC DB 65 A6  F6 F6 55 DD 1C DC FF 61
@@ -24,17 +24,14 @@
  * \brief Class to read XML files.
  */
 
-#ifndef XML_PARSER_H
-#define XML_PARSER_H
+#pragma once
 
 #include "ReadBridge.h"
 
-#ifndef USE_PCH
 #include <cinttypes>
 #include <iosfwd>
 #include <boost/filesystem.hpp>
 #include <libxml++/libxml++.h>
-#endif
 
 namespace xml {
 
@@ -55,5 +52,3 @@ class Reader : public ReadBridge
 };
 
 } // namespace xml
-
-#endif // XML_PARSER_H

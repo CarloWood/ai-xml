@@ -1,6 +1,6 @@
 /**
- * \file catalog_test.cpp
- * \brief Example code that shows how to use ai-xml.
+ * @file
+ * @brief Example code that shows how to use ai-xml.
  *
  * Copyright (C) 2014, 2016  Carlo Wood.
  *
@@ -21,14 +21,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef USE_PCH
 #include "sys.h"
-#endif
-
 #include "Reader.h"
 #include "Writer.h"
-
-#ifndef USE_PCH
 #include "debug.h"
 #include "utils/debug_ostream_operators.h"
 #include <string>
@@ -36,7 +31,6 @@
 #include <vector>
 #include <list>
 #include <boost/filesystem.hpp>
-#endif
 
 //#define PRINT_DEBUG
 

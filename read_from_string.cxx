@@ -1,8 +1,8 @@
 /**
- * \file read_from_string.cpp
- * \brief This file contains the implementation of template class read_from_string.
+ * @file
+ * @brief This file contains the implementation of template class read_from_string.
  *
- * Copyright (C) 2014, 2016  Carlo Wood.
+ * Copyright (C) 2014 - 2017  Carlo Wood.
  *
  * RSA-1024 0x624ACAD5 1997-01-26                    Sign & Encrypt
  * Fingerprint16 = 32 EC A7 B6 AC DB 65 A6  F6 F6 55 DD 1C DC FF 61
@@ -22,13 +22,9 @@
  */
 
 #include "read_from_string.h"
-
 #include "utils/AIAlert.h"
-
-#ifndef USE_PCH
 #include <limits>
 #include <cstdio>
-#endif
 
 namespace xml {
 

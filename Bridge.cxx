@@ -1,8 +1,8 @@
 /**
- * \file Bridge.cpp
- * \brief This file contains the implementation of class Bridge.
+ * @file
+ * @brief This file contains the implementation of class Bridge.
  *
- * Copyright (C) 2014, 2016  Carlo Wood.
+ * Copyright (C) 2014 - 2017  Carlo Wood.
  *
  * RSA-1024 0x624ACAD5 1997-01-26                    Sign & Encrypt
  * Fingerprint16 = 32 EC A7 B6 AC DB 65 A6  F6 F6 55 DD 1C DC FF 61
@@ -21,15 +21,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef USE_PCH
 #include "sys.h"
-#endif
-
 #include "ReadBridge.h"
-
-#ifndef USE_PCH
 #include "debug.h"
-#endif
 
 namespace xml {
 

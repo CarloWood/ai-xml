@@ -1,8 +1,8 @@
 /**
- * \file set_locale_for.h
- * \brief This file contains the declaration of template function set_locale_for.
+ * @file
+ * @brief This file contains the declaration of template function set_locale_for.
  *
- * Copyright (C) 2014, 2016  Carlo Wood.
+ * Copyright (C) 2014 - 2017  Carlo Wood.
  *
  * RSA-1024 0x624ACAD5 1997-01-26                    Sign & Encrypt
  * Fingerprint16 = 32 EC A7 B6 AC DB 65 A6  F6 F6 55 DD 1C DC FF 61
@@ -24,8 +24,7 @@
  * \brief Helper template class to specialize for SetLocale derived classes.
  */
 
-#ifndef XML_SET_LOCALE_FOR_H
-#define XML_SET_LOCALE_FOR_H
+#pragma once
 
 #include "SetLocale.h"
 #include "utils/macros.h"
@@ -52,5 +51,3 @@ struct set_locale_for<T, true> {
 };
 
 } // namespace xml
-
-#endif // XML_SET_LOCALE_FOR_H

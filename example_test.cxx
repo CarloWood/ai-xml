@@ -1,8 +1,8 @@
 /**
- * \file example_test.cpp
- * \brief Example code that shows how to use ai-xml.
+ * @file
+ * @brief Example code that shows how to use ai-xml.
  *
- * Copyright (C) 2014, 2016  Carlo Wood.
+ * Copyright (C) 2014 - 2017  Carlo Wood.
  *
  * RSA-1024 0x624ACAD5 1997-01-26                    Sign & Encrypt
  * Fingerprint16 = 32 EC A7 B6 AC DB 65 A6  F6 F6 55 DD 1C DC FF 61
@@ -21,21 +21,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef USE_PCH
 #include "sys.h"
-#endif
-
 #include "utils/AIAlert.h"
 #include "xml/Reader.h"
 #include "xml/Writer.h"
-
-#ifndef USE_PCH
 #include "debug.h"
 #include "utils/debug_ostream_operators.h"
 #include <iostream>
 #include <boost/filesystem.hpp>
 #include <set>
-#endif
 
 #undef PRINT_DEBUG
 

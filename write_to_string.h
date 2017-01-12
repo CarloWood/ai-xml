@@ -1,8 +1,8 @@
 /**
- * \file write_to_string.h
- * \brief This file contains the declarations of template function write_to_string.
+ * @file
+ * @brief This file contains the declarations of template function write_to_string.
  *
- * Copyright (C) 2014, 2016  Carlo Wood.
+ * Copyright (C) 2014 - 2017  Carlo Wood.
  *
  * RSA-1024 0x624ACAD5 1997-01-26                    Sign & Encrypt
  * Fingerprint16 = 32 EC A7 B6 AC DB 65 A6  F6 F6 55 DD 1C DC FF 61
@@ -21,13 +21,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef XML_WRITE_TO_STRING_H
-#define XML_WRITE_TO_STRING_H
+#pragma once
 
-#ifndef USE_PCH
 #include <sstream>
 #include <iomanip>
-#endif
 
 namespace xml {
 
@@ -55,5 +52,3 @@ std::string write_to_string(T const& obj)
 /// @}
 
 } // namespace xml
-
-#endif // XML_WRITE_TO_STRING_H

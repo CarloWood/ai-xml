@@ -1,6 +1,6 @@
 /**
- * \file read_from_string.h
- * \brief This file contains the declarations of template function read_from_string.
+ * @file
+ * @brief This file contains the declarations of template function read_from_string.
  *
  * Copyright (C) 2014, 2016  Carlo Wood.
  *
@@ -21,8 +21,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef XML_READ_FROM_STRING_H
-#define XML_READ_FROM_STRING_H
+#pragma once
 
 #include <string>
 #include <new>
@@ -90,5 +89,3 @@ void read_from_string(bool& out, std::string const& str);
 /// @}
 
 } // namespace xml
-
-#endif // XML_READ_FROM_STRING_H
