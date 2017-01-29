@@ -13,7 +13,7 @@ The root project should be using
 
 For example, a program that can read and write the
 xml file [catalog.xml](https://github.com/CarloWood/ai-xml/blob/master/catalog_test.xml)
-could look something like [this](https://github.com/CarloWood/ai-xml/blob/master/catalog_test.cpp).
+could look something like [this](https://github.com/CarloWood/ai-xml/blob/master/catalog_test.cxx).
 
 ## Checking out a project that uses the ai-xml submodule.
 
