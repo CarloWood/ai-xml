@@ -1,9 +1,16 @@
 AM_CPPFLAGS = -iquote $(top_srcdir) -iquote $(top_srcdir)/cwd
 
-noinst_LTLIBRARIES = libxml.la
+noinst_LTLIBRARIES =
+if CW_NON_THREADED
+noinst_LTLIBRARIES += libxml.la
+endif
+if CW_THREADED
+noinst_LTLIBRARIES += libxml_r.la
+endif
+
 bin_PROGRAMS = catalog_test example_test
 
-libxml_la_SOURCES = \
+SOURCES = \
 	Bridge.cxx \
 	Bridge.h \
 	escape.cxx \
@@ -33,7 +40,11 @@ catalog_test_SOURCES = \
 example_test_SOURCES = \
 	example_test.cxx
 
+libxml_la_SOURCES = ${SOURCES}
 libxml_la_CXXFLAGS = @LIBXML_CFLAGS@ @LIBCWD_FLAGS@
+
+libxml_r_la_SOURCES = ${SOURCES}
+libxml_r_la_CXXFLAGS = @LIBXML_CFLAGS@ @LIBCWD_R_FLAGS@
 
 catalog_test_CXXFLAGS = @LIBXML_CFLAGS@ @LIBCWD_FLAGS@
 catalog_test_LDADD = libxml.la ../utils/libutils.la ../cwd/libcwd.la @BOOST_FILESYSTEM_LIB@ @BOOST_SYSTEM_LIB@ @LIBXML_LIBS@ @LIBCWD_LIBS@
