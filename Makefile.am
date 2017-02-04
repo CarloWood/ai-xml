@@ -46,10 +46,10 @@ libxml_la_CXXFLAGS = @LIBXML_CFLAGS@ @LIBCWD_FLAGS@
 libxml_r_la_SOURCES = ${SOURCES}
 libxml_r_la_CXXFLAGS = @LIBXML_CFLAGS@ @LIBCWD_R_FLAGS@
 
-catalog_test_CXXFLAGS = @LIBXML_CFLAGS@
+catalog_test_CXXFLAGS = @LIBXML_CFLAGS@ @LIBCWD_FLAGS@
 catalog_test_LDADD = libxml.la ../utils/libutils.la ../cwds/libcwds.la @BOOST_FILESYSTEM_LIB@ @BOOST_SYSTEM_LIB@ @LIBXML_LIBS@
 
-example_test_CXXFLAGS = @LIBXML_CFLAGS@
+example_test_CXXFLAGS = @LIBXML_CFLAGS@ @LIBCWD_FLAGS@
 example_test_LDADD = libxml.la ../utils/libutils.la ../cwds/libcwds.la @BOOST_FILESYSTEM_LIB@ @BOOST_SYSTEM_LIB@ @LIBXML_LIBS@
 
 # --------------- Maintainer's Section
