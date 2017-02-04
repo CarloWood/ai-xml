@@ -1,4 +1,4 @@
-AM_CPPFLAGS = -iquote $(top_srcdir) -iquote $(top_srcdir)/cwd
+AM_CPPFLAGS = -iquote $(top_srcdir) -iquote $(top_srcdir)/cwds
 
 noinst_LTLIBRARIES =
 if CW_NON_THREADED
@@ -46,11 +46,11 @@ libxml_la_CXXFLAGS = @LIBXML_CFLAGS@ @LIBCWD_FLAGS@
 libxml_r_la_SOURCES = ${SOURCES}
 libxml_r_la_CXXFLAGS = @LIBXML_CFLAGS@ @LIBCWD_R_FLAGS@
 
-catalog_test_CXXFLAGS = @LIBXML_CFLAGS@ @LIBCWD_FLAGS@
-catalog_test_LDADD = libxml.la ../utils/libutils.la ../cwd/libcwd.la @BOOST_FILESYSTEM_LIB@ @BOOST_SYSTEM_LIB@ @LIBXML_LIBS@ @LIBCWD_LIBS@
+catalog_test_CXXFLAGS = @LIBXML_CFLAGS@
+catalog_test_LDADD = libxml.la ../utils/libutils.la ../cwds/libcwds.la @BOOST_FILESYSTEM_LIB@ @BOOST_SYSTEM_LIB@ @LIBXML_LIBS@
 
-example_test_CXXFLAGS = @LIBXML_CFLAGS@ @LIBCWD_FLAGS@
-example_test_LDADD = libxml.la ../utils/libutils.la ../cwd/libcwd.la @BOOST_FILESYSTEM_LIB@ @BOOST_SYSTEM_LIB@ @LIBXML_LIBS@ @LIBCWD_LIBS@
+example_test_CXXFLAGS = @LIBXML_CFLAGS@
+example_test_LDADD = libxml.la ../utils/libutils.la ../cwds/libcwds.la @BOOST_FILESYSTEM_LIB@ @BOOST_SYSTEM_LIB@ @LIBXML_LIBS@
 
 # --------------- Maintainer's Section
 

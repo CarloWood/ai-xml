@@ -59,12 +59,11 @@ bin_PROGRAMS = foobar
 would also define
 
 <pre>
-foobar_CXXFLAGS = @LIBXML_CFLAGS@ @LIBCWD_FLAGS@
-foobar_LDADD = ../xml/libxml.la ../utils/libutils.la ../cwd/libcwd.la @BOOST_FILESYSTEM_LIB@ @BOOST_SYSTEM_LIB@ @LIBXML_LIBS@ @LIBCWD_LIBS@
+foobar_LDADD = ../xml/libxml.la ../utils/libutils.la ../cwds/libcwds.la @BOOST_FILESYSTEM_LIB@ @BOOST_SYSTEM_LIB@ @LIBXML_LIBS@
 </pre>
 
 or whatever the path to `xml` etc. is, to link with libxml, and
-assuming you'd also use the [cwd](https://github.com/CarloWood/cwd) submodule.
+assuming you'd also use the [cwds](https://github.com/CarloWood/cwds) submodule.
 
 Finally, run
 
