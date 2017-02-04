@@ -53,17 +53,21 @@ which works as usual;
 for example, a module that defines a
 
 <pre>
-bin_PROGRAMS = foobar
+bin_PROGRAMS = singlethreaded_foobar multithreaded_foobar
 </pre>
 
 would also define
 
 <pre>
-foobar_LDADD = ../xml/libxml.la ../utils/libutils.la ../cwds/libcwds.la @BOOST_FILESYSTEM_LIB@ @BOOST_SYSTEM_LIB@ @LIBXML_LIBS@
+singlethreaded_foobar_CXXFLAGS = @LIBCWD_FLAGS@
+singlethreaded_foobar_LDADD = ../xml/libxml.la ../utils/libutils.la ../cwds/libcwds.la @BOOST_FILESYSTEM_LIB@ @BOOST_SYSTEM_LIB@ @LIBXML_LIBS@
+
+multithreaded_foobar_CXXFLAGS = @LIBCWD_R_FLAGS@
+multithreaded_foobar_LDADD = ../xml/libxml.la ../utils/libutils_r.la ../cwds/libcwds_r.la @BOOST_FILESYSTEM_LIB@ @BOOST_SYSTEM_LIB@ @LIBXML_LIBS@
 </pre>
 
 or whatever the path to `xml` etc. is, to link with libxml, and
-assuming you'd also use the [cwds](https://github.com/CarloWood/cwds) submodule.
+assuming you also use the [cwds](https://github.com/CarloWood/cwds) submodule.
 
 Finally, run
 
