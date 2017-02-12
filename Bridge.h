@@ -308,12 +308,10 @@
 #include "write_to_stream.h"
 
 #include "utils/AIAlert.h"
-
-#ifndef USE_PCH
 #include "debug.h"
+
 #include <libxml++/libxml++.h>
 #include <stack>
-#endif
 
 /// \brief XML specific classes and functions.
 namespace xml {

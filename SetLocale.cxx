@@ -23,7 +23,6 @@
 
 #include "sys.h"
 #include "SetLocale.h"
-#include "utils/macros.h"
 
 namespace xml {
 

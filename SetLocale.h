@@ -33,9 +33,7 @@
 
 #pragma once
 
-#ifndef USE_PCH
 #include <iosfwd>
-#endif
 
 namespace xml {
 

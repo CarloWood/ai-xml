@@ -25,11 +25,9 @@
 
 #include "set_locale_for.h"
 
-#ifndef USE_PCH
 #include <iostream>
 #include <iomanip>
 #include <vector>
-#endif
 
 namespace xml {
 
