@@ -60,10 +60,10 @@ would also define
 
 <pre>
 singlethreaded_foobar_CXXFLAGS = @LIBCWD_FLAGS@
-singlethreaded_foobar_LDADD = ../xml/libxml.la ../utils/libutils.la ../cwds/libcwds.la @BOOST_FILESYSTEM_LIB@ @BOOST_SYSTEM_LIB@ @LIBXML_LIBS@
+singlethreaded_foobar_LDADD = ../xml/libxml.la ../utils/libutils.la $(top_builddir)/cwds/libcwds.la
 
 multithreaded_foobar_CXXFLAGS = @LIBCWD_R_FLAGS@
-multithreaded_foobar_LDADD = ../xml/libxml.la ../utils/libutils_r.la ../cwds/libcwds_r.la @BOOST_FILESYSTEM_LIB@ @BOOST_SYSTEM_LIB@ @LIBXML_LIBS@
+multithreaded_foobar_LDADD = ../xml/libxml.la ../utils/libutils_r.la $(top_builddir)/cwds/libcwds_r.la
 </pre>
 
 or whatever the path to `xml` etc. is, to link with libxml, and
