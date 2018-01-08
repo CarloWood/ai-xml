@@ -5,7 +5,7 @@ providing a C++ framework for serializing classes to and from XML with
 a minimal amount of code per class.
 
 The root project should be using
-[autotools](https://en.wikipedia.org/wiki/GNU_Build_System autotools),
+[autotools](https://en.wikipedia.org/wiki/GNU_Build_System_autotools),
 [cwm4](https://github.com/CarloWood/cwm4) and
 [libcwd](https://github.com/CarloWood/libcwd).
 
