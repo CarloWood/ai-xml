@@ -313,6 +313,12 @@
 #include <libxml++/libxml++.h>
 #include <stack>
 
+#if defined(CWDEBUG) && !defined(DOXYGEN)
+NAMESPACE_DEBUG_CHANNELS_START
+extern channel_ct xmlparser;
+NAMESPACE_DEBUG_CHANNELS_END
+#endif
+
 /// \brief XML specific classes and functions.
 namespace xml {
 

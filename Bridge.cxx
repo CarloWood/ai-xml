@@ -111,3 +111,9 @@ void Bridge::write_child_stream(std::string const& UNUSED_ARG(var))
 }
 
 } // namespace xml
+
+#ifdef CWDEBUG
+NAMESPACE_DEBUG_CHANNELS_START
+channel_ct xmlparser("XMLPARSER");
+NAMESPACE_DEBUG_CHANNELS_END
+#endif
