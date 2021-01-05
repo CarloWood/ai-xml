@@ -64,8 +64,8 @@ class ReadBridge : public Bridge
     struct state_type {
       xmlpp::Element const* m_current_parent;			///< The parent element of the list in m_child_list.
       Glib::ustring m_current_child_name;			///< The name of the child elements in m_child_list.
-      xmlpp::Node::NodeList m_child_list;			///< A list with child nodes of m_current_parent with name m_current_child_name.
-      xmlpp::Node::NodeList::const_iterator m_current_child;	///< A pointer to the current child in m_child_list.
+      xmlpp::Node::const_NodeList m_child_list;			///< A list with child nodes of m_current_parent with name m_current_child_name.
+      xmlpp::Node::const_NodeList::const_iterator m_current_child;	///< A pointer to the current child in m_child_list.
       xmlpp::Element const* m_element;				///< The current (child) element being processed.
 
       /// Construct an initial state_type suitable for the root element.

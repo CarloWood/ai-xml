@@ -184,7 +184,7 @@ std::string ReadBridge::read_child_stream()
   xmlpp::Element const* node = dynamic_cast<xmlpp::Element const*>(*m_state.m_current_child);
   // Call get_element() (open_child(name) or next_child()) before calling read_child_stream.
   ASSERT(node);
-  xmlpp::TextNode const* textnode = node->get_child_text();
+  xmlpp::TextNode const* textnode = node->get_first_child_text();
   if (!textnode)
   {
     Dout(dc::xmlparser, "ReadBridge::read_child_stream(): (xmlpp::Element*)\"" << node->get_name() << "\") has no text node. Returning empty string.");

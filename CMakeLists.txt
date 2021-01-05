@@ -12,7 +12,7 @@ include(AICxxProject)
 
 find_package(PkgConfig REQUIRED)
 find_package(Boost REQUIRED COMPONENTS system filesystem)
-pkg_check_modules(Libxmlpp26 libxml++-2.6 IMPORTED_TARGET)
+pkg_check_modules(Libxmlpp30 libxml++-3.0 IMPORTED_TARGET)
 
 #==============================================================================
 # BUILD PROJECT
@@ -75,7 +75,7 @@ target_link_libraries(xml_ObjLib
     PUBLIC
         Boost::system
         Boost::filesystem
-        PkgConfig::Libxmlpp26
+        PkgConfig::Libxmlpp30
 )
 
 if (OptionEnableLibcwd)
