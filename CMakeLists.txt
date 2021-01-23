@@ -93,14 +93,14 @@ set(AICXX_OBJECTS_LIST AICxx::xml ${AICXX_OBJECTS_LIST} CACHE INTERNAL "List of 
 
 # Testsuite.
 
-add_executable(catalog_test)
+add_executable(catalog_test EXCLUDE_FROM_ALL)
 target_sources(catalog_test
     PRIVATE
         "catalog_test.cxx"
 )
 target_link_libraries(catalog_test PRIVATE ${AICXX_OBJECTS_LIST})
 
-add_executable(example_test)
+add_executable(example_test EXCLUDE_FROM_ALL)
 target_sources(example_test
     PRIVATE
         "example_test.cxx"
