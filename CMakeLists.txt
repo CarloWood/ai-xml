@@ -10,6 +10,7 @@ include(AICxxProject)
 # DEPENDENCIES
 #
 
+find_package(Threads REQUIRED)
 find_package(PkgConfig REQUIRED)
 find_package(Boost REQUIRED COMPONENTS system filesystem)
 pkg_check_modules(Libxmlpp30 libxml++-3.0 IMPORTED_TARGET)
