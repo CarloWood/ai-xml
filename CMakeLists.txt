@@ -13,7 +13,20 @@ include(AICxxProject)
 find_package(Threads REQUIRED)
 find_package(PkgConfig REQUIRED)
 find_package(Boost REQUIRED COMPONENTS system filesystem)
+
 pkg_check_modules(Libxmlpp30 libxml++-3.0 IMPORTED_TARGET)
+if (Libxmlpp30_FOUND)
+  set(LIBXMLPP PkgConfig::Libxmlpp30)
+  set(LIBXMLPP_VERSION 30)
+else ()
+  pkg_check_modules(Libxmlpp26 libxml++-2.6 IMPORTED_TARGET)
+  if (Libxmlpp26_FOUND)
+    set(LIBXMLPP PkgConfig::Libxmlpp26)
+    set(LIBXMLPP_VERSION 26)
+  else ()
+    message(FATAL_ERROR "Neither libxml++-3.0 nor libxml++-2.6 could be found!")
+  endif ()
+endif ()
 
 #==============================================================================
 # BUILD PROJECT
@@ -21,6 +34,9 @@ pkg_check_modules(Libxmlpp30 libxml++-3.0 IMPORTED_TARGET)
 
 # This project is an OBJECT-library, used by other git submodules and the main project.
 add_library(xml_ObjLib OBJECT)
+
+# Let the code know what version is being used.
+target_compile_definitions(xml_ObjLib PUBLIC XMLPP_VERSION=${LIBXMLPP_VERSION})
 
 # Set SOURCE_DIR to the current directory.
 set_property(
@@ -60,8 +76,8 @@ target_sources(xml_ObjLib
 get_target_property(CWDS_INTERFACE_INCLUDE_DIRECTORIES AICxx::cwds INTERFACE_INCLUDE_DIRECTORIES)
 target_include_directories(xml_ObjLib
     PUBLIC
-        "${CWDS_INTERFACE_INCLUDE_DIRECTORIES}" # For sys.h and debug.h.
-        "${CMAKE_CURRENT_BINARY_DIR}"           # For generated files like config.h.
+        "${CWDS_INTERFACE_INCLUDE_DIRECTORIES}"     # For sys.h and debug.h.
+        "${CMAKE_CURRENT_BINARY_DIR}"               # For generated files like config.h.
 )
 
 # Require support for C++17.
@@ -76,7 +92,7 @@ target_link_libraries(xml_ObjLib
     PUBLIC
         Boost::system
         Boost::filesystem
-        PkgConfig::Libxmlpp30
+        ${LIBXMLPP}
 )
 
 if (OptionEnableLibcwd)
