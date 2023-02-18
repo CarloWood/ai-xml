@@ -614,12 +614,28 @@ class NoChildLeft : public AIAlert::Error
 
 /// @endcond
 
+template<typename T, typename = void>
+constexpr bool has_xml = false;
+
+template<typename T>
+constexpr bool has_xml<T, std::void_t<decltype(std::declval<T>().xml(std::declval<Bridge&>()))>> = true;
+
+// The user has to specialize this.
+template<typename T>
+void serialize(T& obj, Bridge& xml)
+{
+  static_assert(has_xml<T>, "xml::serialize is not specialized for this T.");
+}
+
 // Read or write a child element using xml(Bridge&).
 template<typename T>
 void Bridge::child(T& obj)
 {
   open_child();
-  obj.xml(*this);
+  if constexpr (has_xml<T>)
+    obj.xml(*this);
+  else
+    serialize(obj, *this);
   close_child();
 }
 
