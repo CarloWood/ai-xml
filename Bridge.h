@@ -56,7 +56,8 @@
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{.cpp}
  * xml.text_stream(m_some_var);
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * where `m_some_var` is a class member (ie, a `std::stream`).
+ * where `m_some_var` is a class member that can ben written to
+ * an ostream and read from an istream.
  *
  * Finally all children, if any are listed.
  *
@@ -75,7 +76,7 @@
  * The second version is for containers of just classes.
  * For example,
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{.cpp}
- * xml.children(m_some_vector);
+ * xml.children("some_vector", m_some_vector);
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * where `m_some_vector` is a std::vector<SomeClass>, or other
  * standard container, that implements the `push_back` method,
@@ -83,7 +84,7 @@
  * Or, for a container that implements the `insert` method instead,
  * you'd do:
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{.cpp}
- * xml.children(m_some_vector, xml::insert);
+ * xml.children("some_vector", m_some_vector, xml::insert);
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *
  * Both methods have a `_stream' variant that take the name of the element
@@ -242,7 +243,7 @@
  * void Catalog::xml(xml::Bridge& xml)
  * {
  *   xml.node_name("catalog");
- *   xml.children(m_products);
+ *   xml.children("products", m_products);
  * }
  *
  * void Product::xml(xml::Bridge& xml)
@@ -251,7 +252,7 @@
  *   xml.attribute("description", m_description);
  *   xml.attribute("product_image", m_product_image);
  *   xml.set_user_ptr(this);
- *   xml.children(m_items);
+ *   xml.children("items", m_items);
  * }
  *
  * void CatalogItem::xml(xml::Bridge& xml)
@@ -260,14 +261,14 @@
  *   xml.attribute("gender", m_gender);
  *   xml.child_stream("item_number", m_item_number);
  *   xml.child_stream("price", m_price);
- *   xml.children(m_sizes);
+ *   xml.children("sizes", m_sizes);
  * }
  *
  * void Size::xml(xml::Bridge& xml)
  * {
  *   xml.node_name("size");
  *   xml.attribute("description", m_description);
- *   xml.children(m_color_swatches);
+ *   xml.children("color_swatches", m_color_swatches);
  * }
  *
  * void ColorSwatch::xml(xml::Bridge& xml)
@@ -346,6 +347,11 @@ enum insert_method_type {
 /// Type that states we want to push_back child elements in a container.
 enum push_back_method_type {
   push_back
+};
+
+/// Type that states we want to assign child elements to an array.
+enum assign_method_type {
+  assign
 };
 
 class Bridge
@@ -471,6 +477,14 @@ class Bridge
     template<typename T>
       element_return_type text_stream(T& var);
 
+    /** \brief Mandatory child element with required text value.
+     * \param name : the name of the child.
+     * \param value : the required value of the text of this child.
+     *
+     * Throws when reading and \a name is not found or doesn't have the required \a value.
+     */
+    virtual void child(char const* name, char const* value) = 0;
+
     /** \brief Read or write a child element using read_from_stream / write_to_stream.
       * \param name : the name of the element.
       * \param var : a reference to the corresponding variable to read from / write to.
@@ -492,20 +506,13 @@ class Bridge
     template<typename T>
       element_return_type child_stream(char const* name, T& var, T const& default_value, bool always_write = true);
 
-    /** \brief Mandatory child element with required text value.
-     * \param name : the name of the child.
-     * \param value : the required value of the text of this child.
-     *
-     * Throws when reading and \a name is not found or doesn't have the required \a value.
-     */
-    virtual void child(char const* name, char const* value) = 0;
-
     /** \brief Read or write a list of child elements with the same name to or from a std container.
+      * \param name : the name of the element.
       * \param container : a reference to the corresponding container to read from / write to.
       * \param method : set this to 'xml::insert' when you want use 'insert' to add elements to \a container instead of push_back.
       */
     template<typename CONTAINER, typename METHOD = push_back_method_type>
-      void children(CONTAINER& container, METHOD method = push_back);
+      void children(char const* name, CONTAINER& container, METHOD method = push_back);
 
     /** \brief Read or write a list of child elements with the same \a name to or from a std container.
       * \param name : the name of the elements.
@@ -513,7 +520,7 @@ class Bridge
       * \param method : set this to 'xml::insert' when you want use 'insert' to add elements to \a container instead of push_back.
       *
       * This function uses read_from_stream / write_to_stream serializers for value_type.
-      * For containers storing custom classes use children(container) and have the child class implement xml(Bridge&),
+      * For containers storing custom classes use children("container_name", container) and have the child class implement xml(Bridge&),
       * if this is not possible and the default istream/ostream operator is not sufficient, then
       * specialize xml::read_from_stream / xml::write_to_stream for this type.
       */
@@ -529,7 +536,7 @@ class Bridge
   protected:
     // The open_child(T&)/close_child() pair is called around
     // calls to T::xml(Bridge&) when invoking Bridge::child(T&),
-    // and the whole series of calls to T::xml(Bridge&) when invoking Bridge::children(CONTAINER&).
+    // and the whole series of calls to T::xml(Bridge&) when invoking Bridge::children(char const*, CONTAINER&).
     //
     // The open_child(name, T&)/close_child() pair is called around
     // calls to write_child_stream(string)/read_child_stream() when invoking Bridge::child_stream(name, T&).
@@ -624,7 +631,7 @@ constexpr bool has_xml<T, std::void_t<decltype(std::declval<T>().xml(std::declva
 template<typename T>
 void serialize(T& obj, Bridge& xml)
 {
-  static_assert(has_xml<T>, "xml::serialize is not specialized for this T.");
+  static_assert(std::is_integral_v<T>, "Please specialize `serialize` for this T.");
 }
 
 // Read or write a child element using xml(Bridge&).
@@ -744,18 +751,29 @@ void container_add(CONTAINER& container, typename CONTAINER::value_type const& v
   container.push_back(value);
 }
 
+template<typename CONTAINER>
+void container_add(CONTAINER& container, typename CONTAINER::value_type const& value, int index)
+{
+  container[index] = value;
+}
+
 /// @endcond
 
 // Read or write a list of child elements with the same name to or from a std container.
 template<typename CONTAINER, typename METHOD>
-void Bridge::children(CONTAINER& container, METHOD method)
+void Bridge::children(char const* name, CONTAINER& container, METHOD method)
 {
+  open_child();
+  node_name(name);
   open_child();
   if (writing())
   {
     for (typename CONTAINER::iterator iter = container.begin(); iter != container.end(); ++iter)
     {
-      iter->xml(*this);
+      if constexpr (has_xml<typename CONTAINER::value_type>)
+        iter->xml(*this);
+      else
+        serialize(*iter, *this);
     }
   }
   else
@@ -766,7 +784,10 @@ void Bridge::children(CONTAINER& container, METHOD method)
       typename CONTAINER::value_type obj;
       try
       {
-	obj.xml(*this);
+        if constexpr (has_xml<typename CONTAINER::value_type>)
+          obj.xml(*this);
+        else
+          serialize(obj, *this);
       }
       catch (NoChildLeft const&)
       {
@@ -777,6 +798,7 @@ void Bridge::children(CONTAINER& container, METHOD method)
       container_add(container, obj, method);
     }
   }
+  close_child();
   close_child();
 }
 
@@ -800,7 +822,7 @@ void Bridge::children_stream(char const* name, CONTAINER& container, METHOD meth
     try
     {
       open_child(name);	// This might throw NoChildLeft, but even then we still need to call close_child().
-      for (;;)
+      for (int i = 0;; ++i)
       {
 	typename CONTAINER::value_type var;
 	std::string str = read_child_stream();
@@ -811,7 +833,10 @@ void Bridge::children_stream(char const* name, CONTAINER& container, METHOD meth
 	  THROW_ALERT("Failed to read contents of element <[NAME]> from string \"[STRING]\".",
 	      AIArgs("[NAME]", name)("[STRING]", str));
 	}
-	container_add(container, var, method);
+        if constexpr (std::is_same_v<METHOD, assign_method_type>)
+	  container_add(container, var, i);
+        else
+          container_add(container, var, method);
 	next_child();
       }
     }
