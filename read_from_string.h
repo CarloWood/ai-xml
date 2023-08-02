@@ -25,6 +25,7 @@
 
 #include <string>
 #include <new>
+#include <cstdint>
 
 namespace xml {
 
