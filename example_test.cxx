@@ -130,12 +130,14 @@ class Example				// <example
     float m_mandatory;			//                        mandatory="3.1425"
     std::string m_optional;		//                                           optional="hello world">
     // Children.
-    std::vector<Foobar> m_foobar_vec;	//   <foobar...
-					//   </foobar>
-					//   <foobar ...
-					//   </foobar>
-					//   <foobar ...>
-					//   </foobar>
+    std::vector<Foobar> m_foobar_vec;	//   <foobar_vec>
+                                        //     <foobar...
+					//     </foobar>
+					//     <foobar ...
+					//     </foobar>
+					//     <foobar ...>
+					//     </foobar>
+                                        //   </foobar_vec>
 					// </example>
 
   public:
@@ -149,7 +151,7 @@ void Example::xml(xml::Bridge& xml)
   xml.set_version(m_version);
   xml.attribute("mandatory", m_mandatory);
   xml.optional_attribute("optional", m_optional, std::string("MISSING"));
-  xml.children(m_foobar_vec);
+  xml.children("foobar_vec", m_foobar_vec);
 
   if (!xml.writing())
   {

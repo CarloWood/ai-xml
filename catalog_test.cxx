@@ -89,7 +89,7 @@ class Catalog
 void Catalog::xml(xml::Bridge& xml)
 {
   xml.node_name("catalog");
-  xml.children(m_products);
+  xml.children("products", m_products);
 }
 
 void Product::xml(xml::Bridge& xml)
@@ -98,7 +98,7 @@ void Product::xml(xml::Bridge& xml)
   xml.attribute("description", m_description);
   xml.attribute("product_image", m_product_image);
   xml.set_user_ptr(this);
-  xml.children(m_items);
+  xml.children("items", m_items);
   Dout(dc::notice, "Read " << m_items.size() << " items and " << m_image_map.size() << " name->image mappings:");
   for (auto iter = m_image_map.begin(); iter != m_image_map.end(); ++iter)
   {
@@ -112,14 +112,14 @@ void CatalogItem::xml(xml::Bridge& xml)
   xml.attribute("gender", m_gender);
   xml.child_stream("item_number", m_item_number);
   xml.child_stream("price", m_price);
-  xml.children(m_sizes);
+  xml.children("sizes", m_sizes);
 }
 
 void Size::xml(xml::Bridge& xml)
 {
   xml.node_name("size");
   xml.attribute("description", m_description);
-  xml.children(m_color_swatches);
+  xml.children("color_swatches", m_color_swatches);
 }
 
 void ColorSwatch::xml(xml::Bridge& xml)
