@@ -1,10 +1,10 @@
-cmake_minimum_required(VERSION 3.12...3.16)
+cmake_minimum_required(VERSION 3.15...3.30)
 
 project(xml
         LANGUAGES CXX
         DESCRIPTION "A library to serialize custom classes to and from XML by adding a very minimal amount of code to a class" )
 
-include(AICxxProject)
+include(AICxxProject NO_POLICY_SCOPE)
 
 #==============================================================================
 # DEPENDENCIES
@@ -37,12 +37,6 @@ add_library(xml_ObjLib OBJECT)
 
 # Let the code know what version is being used.
 target_compile_definitions(xml_ObjLib PUBLIC XMLPP_VERSION=${LIBXMLPP_VERSION})
-
-# Set SOURCE_DIR to the current directory.
-set_property(
-    TARGET     xml_ObjLib
-    PROPERTY   SOURCE_DIR       "${CMAKE_CURRENT_SOURCE_DIR}"
-)
 
 # The list of source files.
 target_sources(xml_ObjLib
