@@ -12,7 +12,7 @@ include(AICxxProject NO_POLICY_SCOPE)
 
 find_package(Threads REQUIRED)
 find_package(PkgConfig REQUIRED)
-find_package(Boost REQUIRED COMPONENTS system filesystem)
+find_package(Boost REQUIRED COMPONENTS filesystem)
 
 pkg_check_modules(Libxmlpp30 libxml++-3.0 IMPORTED_TARGET)
 if (Libxmlpp30_FOUND)
@@ -84,7 +84,6 @@ target_link_libraries(xml_ObjLib
     PRIVATE
         Threads::Threads
     PUBLIC
-        Boost::system
         Boost::filesystem
         ${LIBXMLPP}
 )
