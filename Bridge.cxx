@@ -114,6 +114,6 @@ void Bridge::write_child_stream(std::string const& UNUSED_ARG(var))
 
 #ifdef CWDEBUG
 NAMESPACE_DEBUG_CHANNELS_START
-channel_ct xmlparser("XMLPARSER");
+Channel xmlparser("XMLPARSER");
 NAMESPACE_DEBUG_CHANNELS_END
 #endif

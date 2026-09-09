@@ -84,6 +84,7 @@ target_link_libraries(xml_ObjLib
     PRIVATE
         Threads::Threads
     PUBLIC
+        AICxx::cwds
         Boost::filesystem
         ${LIBXMLPP}
 )

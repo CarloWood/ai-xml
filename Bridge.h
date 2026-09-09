@@ -316,7 +316,7 @@
 
 #if defined(CWDEBUG) && !defined(DOXYGEN)
 NAMESPACE_DEBUG_CHANNELS_START
-extern channel_ct xmlparser;
+extern Channel xmlparser;
 NAMESPACE_DEBUG_CHANNELS_END
 #endif
 
